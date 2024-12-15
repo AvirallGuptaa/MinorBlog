@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details - My Beautiful Blog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">Post Details</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </header>
+
+        <section class="post-details">
+            <h2 id="postTitle"></h2>
+            <p id="postContent"></p>
+        </section>
+    </div>
+
+    <script>
+        // Get the post ID from the URL and display post details
+        const params = new URLSearchParams(window.location.search);
+        const postId = params.get('id');
+
+        const posts = JSON.parse(localStorage.getItem('posts')) || [];
+        const post = posts.find(post => post.id == postId);
+
+        if (post) {
+            document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postContent').textContent = post.content;
+        } else {
+            document.getElementById('postTitle').textContent = 'Post Not Found';
+            document.getElementById('postContent').textContent = 'Sorry, this post does not exist.';
+        }
+    </script>
+</body>
+</html>
